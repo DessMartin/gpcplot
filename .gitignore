@@ -35,7 +35,6 @@ ipython_config.py
 .pytype/
 .pyre/
 .pyre_cache/
-.pytype/
 .ruff_cache/
 .tox/
 .nox/
