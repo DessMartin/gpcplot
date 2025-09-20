@@ -65,3 +65,4 @@ tmp/
 
 # --- Your project-specific ignores ---
 tests/data/
+temp/

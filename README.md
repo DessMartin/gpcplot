@@ -41,3 +41,57 @@ pip install pytest ipykernel
 
 # Make a Jupyter kernel for this env (so notebooks use the same deps)
 python -m ipykernel install --user --name gpcplot-venv --display-name "Python (gpcplot)"
+
+```
+### Option B: project-local virtual environment (recommended)
+pip install -e .
+
+
+---
+
+## Quickstart 
+
+### (CLI)
+```powershell
+# Minimal: plot all *.txt and save PNG+PDF+SVG to "gpc_overlay.*"
+gpcplot data\*.txt
+
+# Place files in a chosen directory and name them "myplot.*"
+gpcplot data\*.txt -o .\plots\myplot --out-format pdf,svg,png
+
+# Use outside-right legend, show grid, and add DP axis (monomer M0=44.05 g/mol)
+gpcplot data\*.txt --legend outside-right --grid --monomer-mw 44.05
+
+# Tweak appearance
+gpcplot data\*.txt --palette colorblind --linewidth 2.5 --ratio 3:2
+
+# Diagnostics (areas; optional shadow of the raw curve)
+gpcplot data\*.txt --diagnostic --diagnostic-shadow
+```
+### (Notebook)
+
+```python
+from gpcplot import GPCPlotPipeline, Options
+
+pipe = GPCPlotPipeline(use_builtin_style=True)   # loads the package .mplstyle
+
+opts = Options(
+    legend="outside-right",
+    grid=True,
+    monomer_mw=44.05,            # optional DP axis
+    ratio="3:2",
+    palette="auto6",
+    linewidth=2.0,
+)
+
+fig, ax = pipe.plot_from_files(
+    ["data/A.txt", "data/B.txt"],
+    opts
+)
+fig
+```
+#### To save from notebooks:
+```python 
+opts = Options(output="plots", out_format="png")
+pipe.plot_and_save(["data/A.txt"], opts)
+
