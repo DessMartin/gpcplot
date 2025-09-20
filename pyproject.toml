@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "gpcplot"
-version = "0.6.0"
+version = "0.6.1"
 description = "GPC overlay plotting and metrics (log10M default) with journal-ready styles"
 readme = "README.md"
 license = { file = "LICENSE" }
